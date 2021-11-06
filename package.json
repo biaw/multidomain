@@ -1,7 +1,16 @@
 {
   "main": "server.js",
+  "scripts": {
+    "start": "node .",
+    "lint": "eslint ."
+  },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "fs-extra": "^10.0.0",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0"
   }
 }

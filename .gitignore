@@ -1,6 +1,2 @@
 node_modules
-content/*
-!content/_common
-!content/localhost
-!content/example.com
 config.json
