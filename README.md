@@ -15,7 +15,7 @@ A simple static webserver that supports multiple domains, so you don't have to s
 
 ### Setting up using Docker
 
-With Docker, you don't even need to download anything. Fill in the environment variables and you should be able to run the commands below. See the [`example.env`](https://github.com/biaw/multidomain/blob/master/example.env)-file for more information on what to fill these values with.
+With Docker, you don't even need to download anything. You can also slightly customize the behaviour by filling in environment variables. See the [`example.env`](https://github.com/biaw/multidomain/blob/master/example.env)-file for more information on what you can customize.
 
 Having a log volume is optional, it's mostly for development and debugging. A "content" volume is required though.
 
