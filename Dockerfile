@@ -1,10 +1,15 @@
-FROM node:16
+FROM node:16-alpine
+RUN apk add dumb-init
 
-WORKDIR /webserver
+WORKDIR /app
 
 COPY package*.json ./
 RUN npm i
 
-COPY . .
+COPY ./src ./src
+COPY tsconfig.json /
+RUN npm run build
 
-CMD [ "npm", "start" ]
+COPY . ./
+
+CMD ["dumb-init", "npm", "start"]

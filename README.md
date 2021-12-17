@@ -1,24 +1,43 @@
-# webserver-multiple-domains
+[![Test build](https://img.shields.io/github/workflow/status/biaw/multidomain/Build%20and%20publish)](https://github.com/biaw/multidomain/actions/workflows/build-and-publish.yml)
+[![Linting](https://img.shields.io/github/workflow/status/biaw/multidomain/Linting?label=quality)](https://github.com/biaw/multidomain/actions/workflows/linting.yml)
+[![Analysis and Scans](https://img.shields.io/github/workflow/status/biaw/multidomain/Analysis%20and%20Scans?label=scan)](https://github.com/biaw/multidomain/actions/workflows/analysis-and-scans.yml)
+[![Testing](https://img.shields.io/github/workflow/status/biaw/multidomain/Testing?label=tests)](https://github.com/biaw/multidomain/actions/workflows/testing.yml)
+[![DeepScan grade](https://deepscan.io/api/teams/16173/projects/19526/branches/509262/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=16173&pid=19526&bid=509262)
+[![express version](https://img.shields.io/github/package-json/dependency-version/biaw/multidomain/express)](https://www.npmjs.com/package/express)
+[![GitHub Issues](https://img.shields.io/github/issues-raw/biaw/multidomain.svg)](https://github.com/biaw/multidomain/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr-raw/biaw/multidomain.svg)](https://github.com/biaw/multidomain/pulls)
+
+# multipool
 
 A simple static webserver that supports multiple domains, so you don't have to set up a webserver for each domain you own.
 
 ## Setup
 
-### Through Docker
+### Setting up using Docker
 
-Run this to download the image and create the container: `docker run -d --env PORT=8000 -p 8000:8000 -v ./content:/webserver/content --name webserver-multiple-domains promisesolutions/webserver-multiple-domains:latest`
-* `-d`: run in the background
-* `--env PORT=8000`: set the port to 8000
-* `-p 8000:8000`: expose the port to the host, replace 8000 with the port you set as the environment variable
-* `-v ./content:/webserver/content`: mount the content folder to the container. it will auto-create a content-folder if it doesn't exist
-* `--name webserver-multiple-domains`: name the container whatever you'd like
+With Docker, you don't even need to download anything. Fill in the environment variables and you should be able to run the commands below. See the [`example.env`](https://github.com/biaw/multidomain/blob/master/example.env)-file for more information on what to fill these values with.
 
-### Through source
+Having a log volume is optional, it's mostly for development and debugging. A "content" volume is required though.
 
-* Clone this repo
-* Run `npm install`
-* Make a new file called `.env` and put `PORT=8000` (or whatever port you want)
-* Run `npm start`
+#### Linux
+
+```cmd
+docker run --name multidomain \
+  -p 80:80 \
+  -v /multidomain/content:/app/content \
+  -v /multidomain/logs:/app/logs \
+  promisesolutions/multidomain:latest
+```
+
+#### Windows
+
+```cmd
+docker run --name multidomain ^
+  -p 80:80 ^
+  -v "C:\multidomain\database":/app/database ^
+  -v "C:\multidomain\logs":/app/logs ^
+  promisesolutions/multidomain:latest
+```
 
 # Request workflow
 
@@ -26,9 +45,9 @@ Run this to download the image and create the container: `docker run -d --env PO
 - 200 `/content/_common/<path>`
 - 404 `/content/<domain>/404.html`
 - 404 `/content/_common/404.html`
-- 404 plain
+- 404 status without content
 
-tl;dr: it will try the domain folder first, if it doesn't exist then it will try the common folder. if it doesn't exist then it will try the domain folder's 404.html, if it doesn't exist then it will try the common folder's 404.html, if it doesn't exist then it will just return a plain 404.
+tl;dr: It will try the domain folder first. If it doesn't exist then it will try the common folder. If it doesn't exist then it will try the domain folder's 404.html. If it doesn't exist then it will try the common folder's 404.html. If it doesn't exist then it will just return a plain 404 status without any content.
 
 ## Notes
 
