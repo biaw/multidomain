@@ -12,4 +12,7 @@ RUN npm run build
 
 COPY . ./
 
+ENV PORT=80
+EXPOSE 80
+
 CMD ["dumb-init", "npm", "start"]
