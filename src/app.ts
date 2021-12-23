@@ -20,6 +20,7 @@ export default function(contentFolder: string, overrideHostname?: string, common
 
     let path = req.path.substring(1) || "index.html";
     if (!path.includes(".")) path += ".html";
+    if (path.includes("..")) return res.sendStatus(403);
 
     // test for file
     const files = [
