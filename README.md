@@ -34,7 +34,7 @@ docker run --name multidomain \
 ```cmd
 docker run --name multidomain ^
   -p 80:80 ^
-  -v "C:\multidomain\database":/app/database ^
+  -v "C:\multidomain\content":/app/content ^
   -v "C:\multidomain\logs":/app/logs ^
   promisesolutions/multidomain:latest
 ```
