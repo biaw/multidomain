@@ -2,6 +2,7 @@ import { existsSync, readFileSync, statSync } from "fs";
 import express from "express";
 import { expressLogger } from "./utils/logger";
 import { join } from "path";
+import rateLimit from "express-rate-limit";
 
 export default function(contentFolder: string, overrideHostname?: string, commonFolder = "_common") {
   if (!existsSync(contentFolder)) throw new Error("No content folder found");
@@ -9,11 +10,17 @@ export default function(contentFolder: string, overrideHostname?: string, common
   const app = express();
   app.use(expressLogger);
 
+  app.use(rateLimit({
+    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW || "60000"),
+    max: parseInt(process.env.RATE_LIMIT_MAX || "30"),
+  }));
+
   app.get("/*", (req, res) => {
     const domain = overrideHostname || req.hostname;
 
     let path = req.path.substring(1) || "index.html";
     if (!path.includes(".")) path += ".html";
+    if (path.includes("..")) return res.sendStatus(403);
 
     // test for file
     const files = [
