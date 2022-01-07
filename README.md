@@ -17,7 +17,9 @@ A simple static webserver that supports multiple domains, so you don't have to s
 
 With Docker, you don't even need to download anything. You can also slightly customize the behaviour by filling in environment variables. See the [`example.env`](https://github.com/biaw/multidomain/blob/master/example.env)-file for more information on what you can customize.
 
-Having a log volume is optional, it's mostly for development and debugging. A "content" volume is required though.
+* `-p YOUR_PORT:80` - The Docker image runs on port 80, but you can redirect it to whatever port you want.
+* `-v /path/to/content:/app/content` - You need a content folder for your files. Define the path here.
+* `-v /path/to/logs:/app/logs` - Logs are optional, but will help you debug. Omit this if you don't need logs.
 
 #### Linux
 
