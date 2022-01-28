@@ -15,7 +15,7 @@
     "express-rate-limit": "^6.1.0",
     "express-winston": "^4.2.0",
     "winston": "^3.5.0",
-    "winston-daily-rotate-file": "^4.5.5"
+    "winston-daily-rotate-file": "^4.6.0"
   },
   "devDependencies": {
     "@biaw/eslint-config": "^1.0.2",
