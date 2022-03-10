@@ -28,7 +28,7 @@ docker run --name multidomain \
   -p 80:80 \
   -v /multidomain/content:/app/content \
   -v /multidomain/logs:/app/logs \
-  promisesolutions/multidomain:latest
+  ghcr.io/biaw/multidomain:latest
 ```
 
 #### Windows
@@ -38,7 +38,7 @@ docker run --name multidomain ^
   -p 80:80 ^
   -v "C:\multidomain\content":/app/content ^
   -v "C:\multidomain\logs":/app/logs ^
-  promisesolutions/multidomain:latest
+  ghcr.io/biaw/multidomain:latest
 ```
 
 # Request workflow
