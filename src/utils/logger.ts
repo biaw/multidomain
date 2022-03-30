@@ -8,9 +8,9 @@ export const expressLogger = expressWinston.logger({
     new DailyRotateFile({
       filename: "logs/express-info.%DATE%",
       level: "info",
-      maxSize: process.env.LOG_MAX_SIZE || "25m",
-      maxFiles: process.env.LOG_MAX_FILES || "14d",
-      zippedArchive: (process.env.LOG_ZIP || "true") === "true",
+      maxSize: process.env.LOG_MAX_SIZE ?? "25m",
+      maxFiles: process.env.LOG_MAX_FILES ?? "14d",
+      zippedArchive: (process.env.LOG_ZIP ?? "true") === "true",
       extension: ".log",
     }),
   ],
