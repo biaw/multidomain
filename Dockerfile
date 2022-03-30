@@ -3,14 +3,11 @@ RUN apk add dumb-init
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
 RUN npm i
 
-COPY ./src .
-COPY tsconfig.json .
+COPY . ./
 RUN npm run build
-
-COPY . .
 
 ENV PORT=80
 EXPOSE 80
