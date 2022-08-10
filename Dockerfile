@@ -1,4 +1,4 @@
-FROM node:16-alpine@sha256:e28958d905390c70b5323906b81121ee664c9b4531a6187b4aa5e73e962cee41
+FROM node:16-alpine@sha256:0a997e0acb61ec89bb4d78e97aca3cd4ccd7f75c3a3985ffee7e7e09434ab1e7
 RUN apk add dumb-init
 
 WORKDIR /app
